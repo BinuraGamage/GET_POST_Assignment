@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, Helvetica, sans-serif;
+    background: radial-gradient(circle at top,rgb(126, 0, 0),black);
+}
+
+.card{
+    width:420px;
+    padding:40px;
+    border-radius:20px;
+    background:black;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+h1{
+    color:white;
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+p{
+    color:white;
+    margin-bottom:30px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border-radius:12px;
+    border:none;
+    background:#e5e6e9;
+    color:rgb(0, 0, 0);
+    font-size:16px;
+    margin-bottom:25px;
+}
+
+button{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    font-size:18px;
+    font-weight:bold;
+    color:white;
+    cursor:pointer;
+    background:linear-gradient(90deg,#707076,#050507);
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Welcome</h1>
+<p>Please enter your name to receive a greeting.</p>
+
+<input id="username" placeholder="Enter your name">
+
+<button onclick="createUser()">Get Greeting</button>
+
+</div>
+
+<script>
+
+async function createUser(){
+
+    const username = document.getElementById("username").value;
+
+    const response = await fetch("http://localhost:5000/api/user",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({username})
+    });
+
+    if(response.ok){
+        window.location.href = "user.html";
+    }else{
+        const data = await response.json();
+        alert(data.message);
+    }
+}
+
+</script>
+
+</body>
+</html>
