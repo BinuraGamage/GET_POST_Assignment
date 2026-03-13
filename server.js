@@ -7,10 +7,9 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-// variable to store username
 let storedUsername = "";
 
-// POST request
+
 app.post("/api/user", (req, res) => {
 
     const { username } = req.body;
@@ -21,14 +20,14 @@ app.post("/api/user", (req, res) => {
         });
     }
 
-    storedUsername = username; // store username
+    storedUsername = username;
 
     res.json({
         message: "Username stored"
     });
 });
 
-// GET request
+
 app.get("/api/user", (req, res) => {
 
     res.json({
@@ -36,13 +35,6 @@ app.get("/api/user", (req, res) => {
     });
 
 });
-
-// app.get("/", (req, res) => {
-//     res.text
-//     (
-//          "Welcome to the User API"
-//     );
-// });
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
